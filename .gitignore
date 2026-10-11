@@ -1,0 +1,24 @@
+# Hugo
+/public/
+/resources/_gen/
+/assets/jsconfig.json
+hugo_stats.json
+
+# Hugo build lock
+.hugo_build.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+
+# Secrets & local upload scratch
+.env
+.env.*
+!.env.example
+!config/r2.example.env
+assets/r2-upload/

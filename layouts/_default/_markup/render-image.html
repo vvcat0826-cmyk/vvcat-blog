@@ -1,0 +1,34 @@
+{{- $src := .Destination -}}
+{{- $alt := .Text -}}
+{{- $title := .Title -}}
+
+{{- if or (hasPrefix $src "http://") (hasPrefix $src "https://") (hasPrefix $src "//") -}}
+  <img src="{{ $src }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+{{- else -}}
+  {{- $img := "" -}}
+  {{- with .Page.Resources.GetMatch $src -}}
+    {{- $img = . -}}
+  {{- end -}}
+  {{- if not $img -}}
+    {{- with resources.Get ($src | strings.TrimPrefix "/") -}}
+      {{- $img = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $img -}}
+    {{- if site.Params.imageOptimize -}}
+      {{- $q := site.Params.contentImageQuality | default 90 -}}
+      {{- $processed := $img.Process (printf "webp q%d" $q) -}}
+      <img src="{{ $processed.RelPermalink }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+    {{- else -}}
+      <img src="{{ $img.RelPermalink }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+    {{- end -}}
+  {{- else -}}
+    {{- $finalSrc := $src | relURL -}}
+    {{- with site.Params.imageCDN -}}
+      {{- $cdn := strings.TrimSuffix "/" . -}}
+      {{- $path := $src | strings.TrimPrefix "/" -}}
+      {{- $finalSrc = printf "%s/%s" $cdn $path -}}
+    {{- end -}}
+    <img src="{{ $finalSrc }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+  {{- end -}}
+{{- end -}}
