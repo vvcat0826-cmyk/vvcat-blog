@@ -64,7 +64,7 @@ curl -I https://github.com
 | 项 | 值 |
 |----|-----|
 | Production branch | `master` |
-| Build command | `hugo mod get && hugo --minify --baseURL "$CF_PAGES_URL/"` |
+| Build command | `bash scripts/cf-pages-build.sh`（脚本内默认 `HUGO_VERSION=0.167.0`、`GO_VERSION=1.22.0`） |
 | Build output directory | `public` |
 
 4. **Environment variables**（Production / Preview）：
