@@ -2,7 +2,7 @@
 
 ## 必设项（Dashboard）
 
-**Workers & Pages** → 项目 **`dongli-blog`** → **Settings** → **Builds & deployments**
+**Workers & Pages** → 项目 **`vvcat-blog`** → **Settings** → **Builds & deployments**
 
 | 项 | 值 |
 |----|-----|
@@ -23,5 +23,5 @@ Spectra 需要 **Hugo Extended ≥ 0.157**；低于 0.156 时主题 `opengraph.h
 ## 本地对照
 
 ```bash
-hugo mod get && hugo --minify --baseURL "https://dongli-blog.pages.dev/"
+hugo mod get && hugo --minify --baseURL "https://vvcat.space/"
 ```

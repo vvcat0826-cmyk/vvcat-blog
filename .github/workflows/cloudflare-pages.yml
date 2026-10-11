@@ -24,8 +24,9 @@ jobs:
     env:
       HUGO_VERSION: "0.167.0"
       GO_VERSION: "1.22.0"
-      # Must match your Cloudflare Pages project name → https://<name>.pages.dev/
-      CF_PAGES_PROJECT: dongli-blog
+      # Cloudflare Pages project name (wrangler deploy). Default *.pages.dev host may differ after rename.
+      CF_PAGES_PROJECT: vvcat-blog
+      SITE_BASE_URL: https://vvcat.space/
     steps:
       - uses: actions/checkout@v4
 
@@ -42,7 +43,7 @@ jobs:
       - name: Build
         run: |
           hugo mod get
-          hugo --minify --baseURL "https://${CF_PAGES_PROJECT}.pages.dev/"
+          hugo --minify --baseURL "${SITE_BASE_URL}"
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

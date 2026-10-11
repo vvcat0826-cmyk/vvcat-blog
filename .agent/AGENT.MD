@@ -74,15 +74,15 @@ curl -I https://github.com
 | `HUGO_VERSION` | `0.167.0` |
 | `GO_VERSION` | `1.22.0` |
 
-5. 项目名（如 `dongli-blog`）即 `https://<项目名>.pages.dev/`。
+5. CF Pages 项目名（如 `vvcat-blog`）；默认 `*.pages.dev` 可能与项目名不一致，以 Dashboard 为准。
 
 **当前线上**
 
 | 项 | 地址 |
 |----|------|
 | GitHub | https://github.com/vvcat0826-cmyk/vvcat-blog |
-| Pages 生产 | https://dongli-blog.pages.dev/ |
-| CF 项目名 | `dongli-blog`（生产分支 `master`） |
+| Pages 生产 | https://vvcat.space/（备用 https://dongli-blog.pages.dev/） |
+| CF 项目名 | `vvcat-blog`（生产分支 `master`） |
 
 首次已用 Wrangler 直传部署。若要让 **push 自动构建**，请在 Cloudflare 该项目 **Settings → Builds** 中 **Connect to Git** 选上述仓库，并填与上表相同的 Build command / 环境变量（或配置 GitHub Secrets 走 workflow）。
 
@@ -93,7 +93,7 @@ curl -I https://github.com
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`
 
-推送 `master` 后自动构建部署；`CF_PAGES_PROJECT` 默认 `dongli-blog`，与 Pages 项目名一致即可。
+推送 `master` 后自动构建部署；`CF_PAGES_PROJECT` 为 `vvcat-blog`，与 Pages 项目名一致即可。
 
 ### 验收
 

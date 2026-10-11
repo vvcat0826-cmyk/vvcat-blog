@@ -1,7 +1,7 @@
 # Spaceship 域名绑定 Cloudflare Pages（详细教程）
 
 下文用 **`example.com`** 代表你买的域名，请全部替换成自己的域名。  
-本博客 Pages 项目名：**`dongli-blog`**，默认地址：https://dongli-blog.pages.dev/
+本博客 Pages 项目名：**`vvcat-blog`**，默认 `*.pages.dev` 地址：https://dongli-blog.pages.dev/（改名后子域可能不变），主域：https://vvcat.space/
 
 ---
 
@@ -19,7 +19,7 @@
 flowchart TB
   visitor[浏览器访问 example.com]
   cfDNS[Cloudflare DNS 解析]
-  cfPages[Pages 项目 dongli-blog]
+  cfPages[Pages 项目 vvcat-blog]
   visitor --> cfDNS --> cfPages
   spaceship[Spaceship 仅保留注册与 NS 指向]
   spaceship -.->|NS 记录| cfDNS
@@ -29,7 +29,7 @@ flowchart TB
 
 ## 阶段 0：准备清单（5 分钟）
 
-- [ ] Cloudflare 账号（创建 `dongli-blog` Pages 时用的那个）
+- [ ] Cloudflare 账号（Pages 项目 `vvcat-blog`）
 - [ ] Spaceship 账号能登录、域名状态为 **Active**
 - [ ] 决定 **主站 URL**（二选一，后面 Hugo `baseURL` 要一致）：
   - **A**：`https://example.com/`（根域名为主，www 跳转到根域）——常见
@@ -127,7 +127,7 @@ flowchart TB
 ### 3.1 打开 Pages 项目
 
 1. Cloudflare Dashboard 左侧 **Workers & Pages**。
-2. 在 **Pages** 区域找到项目 **`dongli-blog`**（不是 Workers）。
+2. 在 **Pages** 区域找到项目 **`vvcat-blog`**（不是 Workers）。
 3. 点击进入项目概览。
 
 ### 3.2 添加根域名 `example.com`
@@ -162,7 +162,7 @@ Cloudflare 会检查该域名是否在同一账号：
 
 ### 3.5 等待 SSL 证书
 
-1. 回到 **Workers & Pages** → `dongli-blog` → **Custom domains**。
+1. 回到 **Workers & Pages** → `vvcat-blog` → **Custom domains**。
 2. 每个域名旁有 SSL 状态：
    - **Initializing / Pending**：等 5–30 分钟（NS 刚生效时可能更久）。
    - **Active**：可用 HTTPS 访问。
@@ -209,7 +209,7 @@ https://example.com/
 
 ### 4.2 方式一：Cloudflare Pages「Connect to Git」构建
 
-1. **Workers & Pages** → `dongli-blog` → **Settings** → **Builds & deployments** → **Build configuration**。
+1. **Workers & Pages** → `vvcat-blog` → **Settings** → **Builds & deployments** → **Build configuration**。
 2. 确认：
    - **Production branch**：`master`
    - **Build output directory**：`public`
@@ -240,7 +240,7 @@ $env:Path = "C:\Program Files\Go\bin;" + $env:Path
 cd <你的 HugoBlog 仓库路径>
 hugo mod get
 hugo --minify --baseURL "https://example.com/"
-npx wrangler pages deploy public --project-name=dongli-blog --branch=master
+npx wrangler pages deploy public --project-name=vvcat-blog --branch=master
 ```
 
 ### 4.5 本地 `hugo.toml`
@@ -296,7 +296,7 @@ npx wrangler pages deploy public --project-name=dongli-blog --branch=master
 
 ### Q5：example.com 打开不是博客 / 404
 
-- Custom domains 是否绑在 **`dongli-blog`** 项目上。
+- Custom domains 是否绑在 **`vvcat-blog`** 项目上。
 - 最近 Deployment 是否 Success。
 - DNS 的 CNAME 是否指向 `dongli-blog.pages.dev`（以面板显示为准）。
 
@@ -323,7 +323,7 @@ npx wrangler pages deploy public --project-name=dongli-blog --branch=master
 1. Cloudflare **Add site** → Free → 复制 **2 条 NS**
 2. Spaceship **Custom nameservers** → 只填 Cloudflare NS → 保存
 3. 等到 Cloudflare 站点 **Active**
-4. **Workers & Pages** → `dongli-blog` → **Custom domains** → 加 `example.com` 和 `www.example.com`
+4. **Workers & Pages** → `vvcat-blog` → **Custom domains** → 加 `example.com` 和 `www.example.com`
 5. **DNS Records** 确认 `@` / `www` 指向 Pages；SSL **Active**
 6. **Redirect Rules**：www ↔ 根域 二选一为主域
 7. 构建命令 `--baseURL "https://example.com/"` → 重新部署

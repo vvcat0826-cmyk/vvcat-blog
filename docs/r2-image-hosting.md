@@ -1,7 +1,7 @@
 # Cloudflare R2 图床 + CDN（完整实施指南）
 
 下文用 **`example.com`** / **`img.example.com`** 代表你的域名，请替换成真实域名。  
-博客 Pages 项目：**`dongli-blog`**（https://dongli-blog.pages.dev/）。
+博客 Pages 项目：**`vvcat-blog`**（主域 https://vvcat.space/，备用 https://dongli-blog.pages.dev/）。
 
 ---
 
